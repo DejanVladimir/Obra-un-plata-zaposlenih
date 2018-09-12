@@ -1,0 +1,57 @@
+<h1>{{#i18n}}Add Payment{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}payments">{{#i18n}}Payments{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Add Payment{{/i18n}}</li>
+	</ol>
+</nav>
+<form class="form add_payment-form add_payment pt-1 pb-3" method="post" action="{{ www }}payments/add">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldAmountPaid">{{#i18n}}Amount paid{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldAmountPaid" name="amount_paid" placeholder="Enter amount paid" value="{{fvalue_amount_paid}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldMonthWorkedAt">{{#i18n}}Month{{/i18n}}</label>
+		<div class="container mh-lh2">
+			<div class="row">
+				<div class="col col-md-4">
+					<input type="text" class="form-control" id="fieldMonthWorkedAt_0" name="month_worked_at_0" placeholder="YYYY" value="{{fvalue_month_worked_at_0}}">
+				</div>
+				-
+				<div class="col col-md-3"> 
+					<input type="text" class="form-control" id="fieldMonthWorkedAt_1" name="month_worked_at_1" placeholder="MM" value="{{fvalue_month_worked_at_1}}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldPaidAt">{{#i18n}}Date paid{{/i18n}}</label>
+		<input type="date" class="form-control" id="fieldPaidAt" name="paid_at" value="{{fvalue_paid_at}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldIsPaidFully">{{#i18n}}Is paid fully{{/i18n}}</label><br>
+		<input type="checkbox" id="fieldIsPaidFully" name="is_paid_fully" value="1" {{#fvalue_is_paid_fully}} checked{{/fvalue_is_paid_fully}}> Yes
+	</div>
+	<div class="form-group">
+		<label for="fieldEmployeeID">{{#i18n}}Employee{{/i18n}}</label>
+		<select class="form-control" id="fieldEmployeeID" name="employee_id">
+			{{# employees }}
+			<option value="{{ employee_id }}">{{ last_name }}, {{ first_name }} ({{ born_at }})</option>
+			{{/ employees }}
+		</select>
+	</div>
+	<script>var id = '{{ fvalue_employee_id }}'; var o = document.querySelector('select#fieldEmployeeID option[value="' + id + '"]'); if(o) { o.selected = '1' }</script>
+	<div class="form-group">
+		<label for="fieldPaymentDetail">{{#i18n}}Payment details{{/i18n}}</label>
+		<textarea class="form-control" id="fieldPaymentDetail" name="payment_detail" placeholder="Enter payment details" autocomplete="off">{{fvalue_payment_detail}}</textarea>
+	</div>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

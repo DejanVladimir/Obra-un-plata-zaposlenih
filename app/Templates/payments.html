@@ -1,0 +1,37 @@
+<h1>{{#i18n}}Payments{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Payments{{/i18n}}</li>
+	</ol>
+</nav>
+<div class="actions-toolbar">
+	<a href="{{ www }}payments/add" class="btn btn-primary">{{#i18n}}Add payment{{/i18n}}</a>
+</div>
+<div class="spacer mt-3"></div>
+<table class="table payments list-view">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">{{#i18n}}Employee ID{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Month{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Amount{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Actions{{/i18n}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{# payments }}
+		<tr>
+			<th scope="row">{{ payment_id }}</th>
+			<td>{{ employee_id }}</td>
+			<td>{{ month_worked_at }}</td>
+			<td>{{ amount_paid }}</td>
+			<td>
+				<a class="btn btn-sm btn-primary" href="{{ www }}payments/{{ payment_id }}/edit">Edit</a>
+				<a class="btn btn-sm btn-danger" href="{{ www }}payments/{{ payment_id }}/delete">Delete</a>
+			</td>
+		</tr>
+		{{/ payments }}
+	</tbody>
+</table>

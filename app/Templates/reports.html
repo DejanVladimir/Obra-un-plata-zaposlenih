@@ -1,0 +1,57 @@
+<h1>{{#i18n}}Reports{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Reports{{/i18n}}</li>
+	</ol>
+</nav>
+<div class="actions-toolbar">
+	<form method="get" action="{{ www }}reports">
+		<div class="container mh-lh2 d-flex justify-content-center">
+			<div class="row">
+				<div class="col col-md-3">
+					{{#i18n}}Employee{{/i18n}}: 
+				</div>
+				<div class="col col-md-7">
+					<div class="form-group">
+						<select class="form-control" id="fieldFilterEmployee" name="employee_id">
+							{{# employees }}
+							<option value="{{ employee_id }}">{{ last_name }}, {{ first_name }} ({{ born_at }})</option>
+							{{/ employees }}
+						</select>
+					</div>
+				</div>
+				<div class="col col-md-2">
+					<button type="submit" class="btn btn-primary">{{#i18n}}Go{{/i18n}}
+				</div>
+				<input type="hidden" name="action_filter" value="1" />
+			</div>
+		</div>
+		<script>var id = '{{ filter_employee_id }}'; var o = document.querySelector('select#fieldFilterEmployee option[value="' + id + '"]'); if(o) { o.selected = '1' }</script>
+	</form>
+</div>
+<div class="spacer mt-3"></div>
+{{# filter_employee_id }}
+<h3>{{#i18n}}Employee{{/i18n}}: {{ filter_employee_title }}</h3>
+{{/ filter_employee_id }}
+<table class="table reports list-view">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">{{#i18n}}Date{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Actions{{/i18n}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{# reports }}
+		<tr>
+			<th scope="row">{{ id }}</th>
+			<td>{{ month_name }}, {{ year }}.</td>
+			<td>
+				<a class="btn btn-sm btn-primary" href="{{ www }}reports/{{ for_employee }}/{{ date }}">View</a>
+			</td>
+		</tr>
+		{{/ reports }}
+	</tbody>
+</table>

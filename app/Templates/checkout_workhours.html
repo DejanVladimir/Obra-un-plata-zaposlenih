@@ -1,0 +1,49 @@
+<h1>{{#i18n}}Check out employee{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}workhours">{{#i18n}}Work hours{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Check out employee{{/i18n}}</li>
+	</ol>
+</nav>
+<form class="form checkout_workhours-form checkout_workhours pt-1 pb-3" method="post" action="{{ www }}workhours/add/checkout">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldCheckedInAt">{{#i18n}}Check out time{{/i18n}}</label>
+		<div class="container mh-lh2">
+			<div class="row">
+				<div class="col col-md-2">
+					<input type="text" class="form-control" id="fieldCheckedInAt_0" name="checked_out_at_0" placeholder="HH" value="{{fvalue_checked_out_at_0}}">
+				</div>
+				:
+				<div class="col col-md-2"> 
+					<input type="text" class="form-control" id="fieldCheckedInAt_1" name="checked_out_at_1" placeholder="MM" value="{{fvalue_checked_out_at_1}}">
+				</div>
+				:
+				<div class="col col-md-2">
+					<input type="text" class="form-control" id="fieldCheckedInAt_2" name="checked_out_at_2" placeholder="SS" value="{{fvalue_checked_out_at_2}}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="fieldDate">{{#i18n}}Date{{/i18n}}</label>
+		<input type="date" class="form-control" id="fieldDate" name="checked_at" value="{{fvalue_checked_at}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldEmployeeID">{{#i18n}}Employee{{/i18n}}</label>
+		<select class="form-control" id="fieldEmployeeID" name="employee_id">
+			{{# employees }}
+			<option value="{{ employee_id }}">{{ last_name }}, {{ first_name }} ({{ born_at }})</option>
+			{{/ employees }}
+		</select>
+	</div>
+	<script>var id = '{{ fvalue_employee_id }}'; var o = document.querySelector('select#fieldEmployeeID option[value="' + id + '"]'); if(o) { o.selected = '1' }</script>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

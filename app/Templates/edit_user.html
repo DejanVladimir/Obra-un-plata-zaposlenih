@@ -1,0 +1,27 @@
+<h1>{{#i18n}}Edit User{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}users">{{#i18n}}Users{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Edit User{{/i18n}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{ fvalue_username }}</li>
+	</ol>
+</nav>
+<form class="form edit_user-form edit_user pt-1 pb-3" method="post" action="{{ www }}users/{{ user_id }}/edit">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldUsername">{{#i18n}}Username{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldUsername" name="username" placeholder="Enter username" value="{{fvalue_username}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldPassword">{{#i18n}}Password{{/i18n}}</label>
+		<input type="password" class="form-control" id="fieldPassword" name="password" placeholder="Enter password" value="">
+	</div>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

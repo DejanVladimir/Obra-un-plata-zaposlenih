@@ -1,0 +1,45 @@
+<h1>{{#i18n}}Edit Employee{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}employees">{{#i18n}}Employees{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Edit Employee{{/i18n}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+	</ol>
+</nav>
+<form class="form edit_employee-form edit_employee pt-1 pb-3" method="post" action="{{ www }}employees/{{ employee_id }}/edit">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldFirstName">{{#i18n}}First name{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldFirstName" name="first_name" placeholder="Enter first name" value="{{fvalue_first_name}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldLastName">{{#i18n}}Last name{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldLastName" name="last_name" placeholder="Enter last name" value="{{fvalue_last_name}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldBornAt">{{#i18n}}Date of birth{{/i18n}}</label>
+		<input type="date" class="form-control" id="fieldBornAt" name="born_at" value="{{fvalue_born_at}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldWorkplaceTitle">{{#i18n}}Workplace title{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldWorkplaceTitle" name="workplace_title" aria-describedby="helpWorkplaceTitle" value="{{fvalue_workplace_title}}">
+		<small id="helpWorkplaceTitle" class="form-text text-muted">{{#i18n}}Workplace calling of the employee. For example: "Senior Web Developer"{{/i18n}}. </small>
+	</div>
+	<div class="form-group">
+		<label for="fieldPayGradeID">{{#i18n}}Pay Grade{{/i18n}}</label>
+		<select class="form-control" id="fieldPayGradeID" name="pay_grade_id">
+			{{# paygrades }}
+			<option value="{{ pay_grade_id }}">{{ title }}</option>
+			{{/ paygrades }}
+		</select>
+	</div>
+	<script>var id = '{{ fvalue_pay_grade_id }}'; var o = document.querySelector('select#fieldPayGradeID option[value="' + id + '"]'); if(o) { o.selected = '1' }</script>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

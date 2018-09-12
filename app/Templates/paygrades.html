@@ -1,0 +1,33 @@
+<h1>{{#i18n}}Pay grades{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Pay grades{{/i18n}}</li>
+	</ol>
+</nav>
+<div class="actions-toolbar">
+	<a href="{{ www }}paygrades/add" class="btn btn-primary">{{#i18n}}Add pay grade{{/i18n}}</a>
+</div>
+<div class="spacer mt-3"></div>
+<table class="table paygrades list-view">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">{{#i18n}}Title{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Actions{{/i18n}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{# paygrades }}
+		<tr>
+			<th scope="row">{{ pay_grade_id }}</th>
+			<td>{{ title }}</td>
+			<td>
+				<a class="btn btn-sm btn-primary" href="{{ www }}paygrades/{{ pay_grade_id }}/edit">Edit</a>
+				<a class="btn btn-sm btn-danger" href="{{ www }}paygrades/{{ pay_grade_id }}/delete">Delete</a>
+			</td>
+		</tr>
+		{{/ paygrades }}
+	</tbody>
+</table>

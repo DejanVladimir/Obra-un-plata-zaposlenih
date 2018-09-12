@@ -1,0 +1,30 @@
+<h1>Employees</h1>
+<div class="actions-toolbar pt-3">
+	<a href="{{ www }}employees/add" class="btn btn-primary">{{#i18n}}Add employee{{/i18n}}</a>
+</div>
+<div class="spacer mt-3"></div>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">{{#i18n}}First name{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Last name{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Date of birth{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Actions{{/i18n}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{# employees }}
+		<tr>
+			<th scope="row">{{ employee_id }}</th>
+			<td>{{ first_name }}</td>
+			<td>{{ last_name }}</td>
+			<td>{{ date_of_birth }}</td>
+			<td>
+				<a class="btn btn-sm btn-primary" href="{{ www }}employees/{{ employee_id }}/edit">Edit</a>
+				<a class="btn btn-sm btn-danger" href="{{ www }}employees/{{ employee_id }}/delete">Delete</a>
+			</td>
+		</tr>
+		{{/ employees }}
+	</tbody>
+</table>

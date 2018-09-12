@@ -1,0 +1,40 @@
+<h1>{{#i18n}}Work hours{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Work hours{{/i18n}}</li>
+	</ol>
+</nav>
+<div class="actions-toolbar">
+	<a href="{{ www }}workhours/add/checkin" class="btn btn-primary">{{#i18n}}Check-in{{/i18n}}</a>
+	<a href="{{ www }}workhours/add/checkout" class="btn btn-primary">{{#i18n}}Check-out{{/i18n}}</a>
+</div>
+<div class="spacer mt-3"></div>
+<table class="table benefits list-view">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">{{#i18n}}Employee{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Date{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Check in{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Check out{{/i18n}}</th>
+			<th scope="col">{{#i18n}}Actions{{/i18n}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{# workhours }}
+		<tr>
+			<th scope="row">{{ work_hour_id }}</th>
+			<td>{{ employee_title }}</td>
+			<td>{{ checked_at }}</td>
+			<td>{{ checked_in_at }}</td>
+			<td>{{ checked_out_at }}</td>
+			<td>
+				<a class="btn btn-sm btn-primary" href="{{ www }}workhours/{{ work_hour_id }}/edit">Edit</a>
+				<a class="btn btn-sm btn-danger" href="{{ www }}workhours/{{ work_hour_id }}/delete">Delete</a>
+			</td>
+		</tr>
+		{{/ workhours }}
+	</tbody>
+</table>

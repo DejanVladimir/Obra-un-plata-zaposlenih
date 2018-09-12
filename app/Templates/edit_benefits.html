@@ -1,0 +1,43 @@
+<h1>{{#i18n}}Edit Benefits category{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}benefits">{{#i18n}}Benefits{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Edit Benefits category{{/i18n}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{fvalue_title}}</li>
+	</ol>
+</nav>
+<form class="form edit_benefits-form edit_benefits pt-1 pb-3" method="post" action="{{ www }}benefits/{{ benefit_id }}/edit">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldTitle">{{#i18n}}Title{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldTitle" name="title" placeholder="Enter title" value="{{fvalue_title}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldTax">{{#i18n}}Income tax{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldTax" name="tax" step="0.01" min="0" max="100" aria-describedby="helpTax" value="{{fvalue_tax}}">
+		<small id="helpTax" class="form-text text-muted">{{#i18n}}Tax on income of employee. Usually{{/i18n}} <strong>10%</strong>. </small>
+	</div>
+	<div class="form-group">
+		<label for="fieldDisabilityAndPension">{{#i18n}}Disability and pension{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldDisabilityAndPension" step="0.01" min="0" max="100" name="disability_and_pension" aria-describedby="helpDisabilityAndPension" value="{{fvalue_disability_and_pension}}">
+		<small id="helpDisabilityAndPension" class="form-text text-muted">{{#i18n}}Disability and pension benefits amount. Usually{{/i18n}} <strong>14%</strong>. </small>
+	</div>
+	<div class="form-group">
+		<label for="fieldHealthInsurance">{{#i18n}}Health insurance{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldHealthInsurance" step="0.01" min="0" max="100" name="health_insurance" aria-describedby="helpHealthInsurance" value="{{fvalue_health_insurance}}">
+		<small id="helpHealthInsurance" class="form-text text-muted">{{#i18n}}Health insurance amount. Usually{{/i18n}} <strong>5.15%</strong>. </small>
+	</div>
+	<div class="form-group">
+		<label for="fieldUnemployment">{{#i18n}}Unemployment{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldUnemployment" name="unemployement" step="0.01" min="0" max="100" aria-describedby="helpUnemployment" value="{{fvalue_unemployement}}">
+		<small id="helpUnemployment" class="form-text text-muted">{{#i18n}}Unemployment benefits amount. Usually{{/i18n}} <strong>0.75%</strong>. </small>
+	</div>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

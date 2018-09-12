@@ -1,0 +1,13 @@
+<form class="form-signin" method="post" action="{{ www }}login">
+	<h1 class="h3 mb-3 font-weight-normal">{{#i18n}}Login{{/i18n}}</h1>
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<input type="text" id="inputUsername" class="form-control" name="username" placeholder="{{#i18n}}Username{{/i18n}}" required autofocus>
+	<input type="password" id="inputPassword" name="password" class="form-control" placeholder="{{#i18n}}Password{{/i18n}}" required>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">{{#i18n}}Login{{/i18n}}</button>
+	<p class="mt-5 mb-3 text-muted text-center">{{#i18n}}Your IP address will be logged!{{/i18n}}</p>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>

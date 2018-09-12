@@ -1,0 +1,19 @@
+<div class="container mt-3 skeleton">
+	{{{ header }}}
+	{{^ display_sidebar }}
+		<div class="main">
+			{{{ main }}}
+		</div>
+	{{/ display_sidebar }}
+	{{# display_sidebar }}
+		<div class="row">
+			<div class="col-sm sidebar">
+				{{{ sidebar }}}
+			</div>
+			<div class="col-8 main">
+				{{{ main }}}
+			</div>
+		</div>
+	{{/ display_sidebar }}
+	{{{ footer }}}
+</div>

@@ -1,0 +1,84 @@
+<h1>{{#i18n}}Report{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}reports">{{#i18n}}Reports{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}View report{{/i18n}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{title}}</li>
+	</ol>
+</nav>
+{{# report.is_all }}
+<h3 class="mb-3">{{#i18n}}Report for {{/i18n}}{{#i18n}}All employees{{/i18n}}</h3>
+{{/ report.is_all }}
+{{^ report.is_all }}
+<h3 class="mb-3">{{#i18n}}Report for {{/i18n}}{{ report.employee.last_name }}, {{ report.employee.first_name }}</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th style="width:237px">{{#i18n}}First name{{/i18n}}</th>
+			<td>{{ report.employee.first_name }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Last name{{/i18n}}</th>
+			<td>{{ report.employee.first_name }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Date of birth{{/i18n}}</th>
+			<td>{{ report.employee.born_at }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Workplace title{{/i18n}}</th>
+			<td>{{ report.employee.workplace_title }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Benefits category{{/i18n}}</th>
+			<td>{{ report.benefitsCategory.title }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Pay grade{{/i18n}}</th>
+			<td>{{ report.payGrade.title }}</td>
+		</tr>
+	</tbody>
+</table>
+{{/ report.is_all }}
+<table class="table">
+	<tbody>
+		<tr>
+			<th style="width:237px">{{#i18n}}Period{{/i18n}}</th>
+			<td>{{ report.days_start }} - {{ report.days_end }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Total hours{{/i18n}}</th>
+			<td>{{ report.totalHours}} {{#i18n}}hours{{/i18n}}, {{ report.leftoverMinutesTotal}} {{#i18n}}minutes{{/i18n}}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Gross Salary{{/i18n}}</th>
+			<td>{{ report.grossSalaryTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Tax{{/i18n}}</th>
+			<td>{{ report.benefitsTaxTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Disability and pension{{/i18n}}</th>
+			<td>{{ report.benefitsDisabilityAndPensionTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Health insurance{{/i18n}}</th>
+			<td>{{ report.benefitsHealthInsuranceTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Unemployement insurance{{/i18n}}</th>
+			<td>{{ report.benefitsUnemployementTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Total benefits{{/i18n}}</th>
+			<td>{{ report.benefitsTotal }} {{ currency }}</td>
+		</tr>
+		<tr>
+			<th style="width:237px">{{#i18n}}Net salary{{/i18n}}</th>
+			<td><u>{{ report.netSalaryTotal }}</u> {{ currency }}</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+php_value error_reporting -1
+php_value error_log C:\xampp\htdocs\fv_racun_v3\php_errors.log
+php_flag log_errors 1

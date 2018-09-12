@@ -1,0 +1,41 @@
+<h1>{{#i18n}}Add Pay grade{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}paygrades">{{#i18n}}Pay grades{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Add Pay grade{{/i18n}}</li>
+	</ol>
+</nav>
+<form class="form add_paygrades-form add_paygrades pt-1 pb-3" method="post" action="{{ www }}paygrades/add">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<div class="form-group">
+		<label for="fieldTitle">{{#i18n}}Title{{/i18n}}</label>
+		<input type="text" class="form-control" id="fieldTitle" name="title" placeholder="Enter title" value="{{fvalue_title}}">
+	</div>
+	<div class="form-group">
+		<label for="fieldBenefitsCategory">{{#i18n}}Benefits Category{{/i18n}}</label>
+		<select class="form-control" id="fieldBenefitsCategory" name="benefit_id">
+			{{# benefits }}
+			<option value="{{ benefit_id }}">{{ title }}</option>
+			{{/ benefits }}
+		</select>
+	</div>
+	<script>var id = '{{ fvalue_benefit_id }}'; var o = document.querySelector('select#fieldBenefitsCategory option[value="' + id + '"]'); if(o) { o.selected = '1' }</script>
+	<div class="form-group">
+		<label for="fieldMaximumPay">{{#i18n}}Maximum pay{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldMaximumPay" min="1" name="max_pay" aria-describedby="helpMaximumPay" value="{{fvalue_max_pay}}">
+		<small id="helpMaximumPay" class="form-text text-muted">{{#i18n}}Maximum salary for the work hours in the pay grade of the employee.{{/i18n}}</small>
+	</div>
+	<div class="form-group">
+		<label for="fieldMaximumHours">{{#i18n}}Maximum work hours{{/i18n}}</label>
+		<input type="number" class="form-control" id="fieldMaximumHours" min="1" name="max_hours" aria-describedby="helpMaximumHours" value="{{fvalue_max_hours}}">
+		<small id="helpMaximumHours" class="form-text text-muted">{{#i18n}}Maximum number of work hours for an employee in this pay grade.{{/i18n}}</small>
+	</div>
+	<button type="submit" class="btn btn-primary">{{#i18n}}Save{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>
