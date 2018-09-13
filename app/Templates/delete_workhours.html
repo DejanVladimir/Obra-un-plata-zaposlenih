@@ -1,0 +1,21 @@
+<h1>{{#i18n}}Delete Work Hours{{/i18n}}</h1>
+<div class="spacer mt-3"></div>
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ www }}">{{#i18n}}Home{{/i18n}}</a></li>
+		<li class="breadcrumb-item"><a href="{{ www }}workhours">{{#i18n}}Work Hourss{{/i18n}}</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{#i18n}}Delete Work Hours{{/i18n}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+	</ol>
+</nav>
+<form class="form delete_work hours-form delete_work hours pt-1 pb-3" method="post" action="{{ www }}workhours/{{ work_hour_id }}/delete">
+	{{# error }}
+	<div class="alert alert-danger" role="alert">
+		{{#i18n}}{{ error }}{{/i18n}}
+	</div>
+	{{/ error }}
+	<p>{{#i18n}}Are you sure you want to delete{{/i18n}} <strong>"{{ title }}"</strong>? {{#i18n}}This will delete the work hours for this period!{{/i18n}}</p>
+	<button type="submit" class="btn btn-danger">{{#i18n}}Delete{{/i18n}}</button>
+	<button type="button" onclick="window.location.href='{{ www }}workhours'" class="btn btn-primary">{{#i18n}}Go back{{/i18n}}</button>
+	<input type="hidden" name="csrf_token" value="{{ csrf_token }}"> 
+</form>
