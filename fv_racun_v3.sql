@@ -36,7 +36,7 @@ CREATE TABLE `employee` (
   `is_archived` tinyint(4) NOT NULL,
   `pay_grade_id` int(11) NOT NULL,
   PRIMARY KEY (`employee_id`),
-  UNIQUE KEY `born_at` (`born_at`),
+  UNIQUE KEY `uq_born_at` (`born_at`),
   KEY `first_name` (`first_name`),
   KEY `last_name` (`last_name`),
   KEY `workplace_title` (`workplace_title`(191)),
@@ -80,7 +80,7 @@ CREATE TABLE `pay_grade` (
   KEY `max_hours` (`max_hours`),
   KEY `max_pay` (`max_pay`),
   KEY `benefit_id` (`benefit_id`),
-  CONSTRAINT `fk_benefit_id` FOREIGN KEY (`benefit_id`) REFERENCES `benefit` (`benefit_id`)
+  CONSTRAINT `fk_pay_grade_benefit_id` FOREIGN KEY (`benefit_id`) REFERENCES `benefit` (`benefit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `pay_grade` (`pay_grade_id`, `title`, `max_hours`, `max_pay`, `benefit_id`) VALUES
@@ -110,7 +110,7 @@ CREATE TABLE `work_hour` (
   KEY `checked_in_at` (`checked_in_at`),
   KEY `checked_out_at` (`checked_out_at`),
   KEY `checked_at` (`checked_at`),
-  KEY `employee_id` (`employee_id`),
+  KEY `fk_work_hour_employee_id` (`employee_id`),
   CONSTRAINT `fk_work_hour_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
