@@ -57,6 +57,7 @@ CREATE TABLE `payment` (
   `paid_at` date NOT NULL,
   `is_paid_fully` tinyint(1) NOT NULL,
   `payment_detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`payment_id`),
   KEY `fk_payment_employee_id` (`employee_id`),
   KEY `amount_paid` (`amount_paid`),
   KEY `month_worked_at` (`month_worked_at`),
