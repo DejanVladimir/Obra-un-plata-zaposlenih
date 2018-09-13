@@ -30,7 +30,7 @@ Class DeletePaymentController extends \MyApp\Controller {
 		if(count($items) < 1) {
 			throw new \Exception('The Payment was not found. ');
 		}
-		$this->data['title'] = $items[0]['title'];
+		$this->data['title'] = $items[0]['month_worked_at'];
 		if(\MyApp\Router::request()['method'] === 'POST') {
 			try {
 				$this->_processForm();

@@ -11,7 +11,6 @@ Class DeleteWorkHoursController extends \MyApp\Controller {
 	private function _processForm() {
 		$model = $this->model;
 		
-		
 		$requestData = \MyApp\Router::request()['data'];
 		$csrf_token = $requestData['csrf_token'];
 		\MyApp\Helpers\CSRFProtection::validate($csrf_token);
@@ -30,7 +29,7 @@ Class DeleteWorkHoursController extends \MyApp\Controller {
 		if(count($items) < 1) {
 			throw new \Exception('The Work hours was not found. ');
 		}
-		$this->data['title'] = $items[0]['title'];
+		$this->data['title'] = $items[0]['checked_at'];
 		if(\MyApp\Router::request()['method'] === 'POST') {
 			try {
 				$this->_processForm();
