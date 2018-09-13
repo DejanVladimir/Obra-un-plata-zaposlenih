@@ -20,7 +20,7 @@ CREATE TABLE `benefit` (
   `health_insurance` decimal(10,2) NOT NULL,
   `unemployement` decimal(10,2) NOT NULL,
   PRIMARY KEY (`benefit_id`),
-  UNIQUE KEY `uq_title` (`title`)
+  UNIQUE KEY `uq_benefit_title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `benefit` (`benefit_id`, `title`, `tax`, `disability_and_pension`, `health_insurance`, `unemployement`) VALUES
@@ -36,12 +36,12 @@ CREATE TABLE `employee` (
   `is_archived` tinyint(4) NOT NULL,
   `pay_grade_id` int(11) NOT NULL,
   PRIMARY KEY (`employee_id`),
-  UNIQUE KEY `uq_born_at` (`born_at`),
+  UNIQUE KEY `uq_employee_born_at` (`born_at`),
   KEY `first_name` (`first_name`),
   KEY `last_name` (`last_name`),
   KEY `workplace_title` (`workplace_title`(191)),
   KEY `is_archived` (`is_archived`),
-  KEY `pay_grade_id` (`pay_grade_id`),
+  KEY `fk_employee_pay_grade_id` (`pay_grade_id`),
   CONSTRAINT `fk_employee_pay_grade_id` FOREIGN KEY (`pay_grade_id`) REFERENCES `pay_grade` (`pay_grade_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -50,14 +50,14 @@ INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `born_at`, `wo
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) NOT NULL,
   `month_worked_at` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
   `amount_paid` decimal(10,2) NOT NULL,
   `paid_at` date NOT NULL,
   `is_paid_fully` tinyint(1) NOT NULL,
   `payment_detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  KEY `employee_id` (`employee_id`),
+  KEY `fk_payment_employee_id` (`employee_id`),
   KEY `amount_paid` (`amount_paid`),
   KEY `month_worked_at` (`month_worked_at`),
   KEY `paid_at` (`paid_at`),
@@ -66,7 +66,7 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `payment` (`payment_id`, `employee_id`, `month_worked_at`, `amount_paid`, `paid_at`, `is_paid_fully`, `payment_detail`) VALUES
-(0,	1,	'2018-06',	11000.00,	'2018-09-11',	1,	'test account');
+(1,	1,	'2018-06',	11000.00,	'2018-09-11',	1,	'test account');
 
 DROP TABLE IF EXISTS `pay_grade`;
 CREATE TABLE `pay_grade` (
@@ -76,10 +76,10 @@ CREATE TABLE `pay_grade` (
   `max_pay` decimal(10,2) NOT NULL,
   `benefit_id` int(11) NOT NULL,
   PRIMARY KEY (`pay_grade_id`),
-  UNIQUE KEY `uq_title` (`title`),
+  UNIQUE KEY `uq_pay_grade_title` (`title`),
   KEY `max_hours` (`max_hours`),
   KEY `max_pay` (`max_pay`),
-  KEY `benefit_id` (`benefit_id`),
+  KEY `fk_pay_grade_benefit_id` (`benefit_id`),
   CONSTRAINT `fk_pay_grade_benefit_id` FOREIGN KEY (`benefit_id`) REFERENCES `benefit` (`benefit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -92,7 +92,7 @@ CREATE TABLE `user` (
   `username` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `uq_username` (`username`),
+  UNIQUE KEY `uq_user_username` (`username`),
   KEY `password` (`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
