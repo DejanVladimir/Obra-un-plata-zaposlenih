@@ -5,24 +5,26 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-USE `fv_racun_v3`;
-
 SET NAMES utf8mb4;
+
+DROP DATABASE IF EXISTS `fv_racun_v3`;
+CREATE DATABASE `fv_racun_v3` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `fv_racun_v3`;
 
 DROP TABLE IF EXISTS `benefit`;
 CREATE TABLE `benefit` (
   `benefit_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tax` decimal(10,0) NOT NULL,
-  `disability_and_pension` decimal(10,0) NOT NULL,
-  `health_insurance` decimal(10,0) NOT NULL,
-  `unemployement` decimal(10,0) NOT NULL,
+  `tax` decimal(10,2) NOT NULL,
+  `disability_and_pension` decimal(10,2) NOT NULL,
+  `health_insurance` decimal(10,2) NOT NULL,
+  `unemployement` decimal(10,2) NOT NULL,
   PRIMARY KEY (`benefit_id`),
   UNIQUE KEY `uq_title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `benefit` (`benefit_id`, `title`, `tax`, `disability_and_pension`, `health_insurance`, `unemployement`) VALUES
-(1,	'Benefits Category 1',	10,	14,	5,	1);
+(1,	'Benefits Category 1',	10.00,	14.00,	5.00,	1.00);
 
 DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
@@ -31,7 +33,7 @@ CREATE TABLE `employee` (
   `last_name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `born_at` date NOT NULL,
   `workplace_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_archived` int(1) NOT NULL,
+  `is_archived` tinyint(4) NOT NULL,
   `pay_grade_id` int(11) NOT NULL,
   PRIMARY KEY (`employee_id`),
   UNIQUE KEY `born_at` (`born_at`),
@@ -51,9 +53,9 @@ CREATE TABLE `payment` (
   `payment_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `month_worked_at` varchar(7) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `amount_paid` decimal(10,0) NOT NULL,
+  `amount_paid` decimal(10,2) NOT NULL,
   `paid_at` date NOT NULL,
-  `is_paid_fully` int(1) NOT NULL,
+  `is_paid_fully` tinyint(1) NOT NULL,
   `payment_detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
   KEY `employee_id` (`employee_id`),
   KEY `amount_paid` (`amount_paid`),
@@ -64,14 +66,14 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `payment` (`payment_id`, `employee_id`, `month_worked_at`, `amount_paid`, `paid_at`, `is_paid_fully`, `payment_detail`) VALUES
-(0,	1,	'2018-06',	11000,	'2018-09-11',	1,	'test account');
+(0,	1,	'2018-06',	11000.00,	'2018-09-11',	1,	'test account');
 
 DROP TABLE IF EXISTS `pay_grade`;
 CREATE TABLE `pay_grade` (
   `pay_grade_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `max_hours` int(4) NOT NULL,
-  `max_pay` decimal(10,0) NOT NULL,
+  `max_pay` decimal(10,2) NOT NULL,
   `benefit_id` int(11) NOT NULL,
   PRIMARY KEY (`pay_grade_id`),
   UNIQUE KEY `uq_title` (`title`),
@@ -82,7 +84,7 @@ CREATE TABLE `pay_grade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `pay_grade` (`pay_grade_id`, `title`, `max_hours`, `max_pay`, `benefit_id`) VALUES
-(1,	'Pay grade 1',	180,	35000,	1);
+(1,	'Pay grade 1',	180,	35000.00,	1);
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -117,4 +119,4 @@ INSERT INTO `work_hour` (`work_hour_id`, `checked_in_at`, `checked_out_at`, `che
 (2,	'10:00:00',	'18:12:11',	'2018-09-04',	1),
 (4,	'11:05:49',	'11:07:04',	'2018-09-11',	1);
 
--- 2018-09-12 06:37:20
+-- 2018-09-13 06:47:03
